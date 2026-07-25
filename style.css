@@ -249,7 +249,8 @@ nav.site-nav {
 
 /* About */
 .about {
-  padding: 8px 0 56px;
+  padding-top: 8px;
+  padding-bottom: 56px;
   border-top: 1px solid var(--border);
 }
 
@@ -267,7 +268,8 @@ nav.site-nav {
 
 /* Contact */
 .contact {
-  padding: 0 0 64px;
+  padding-top: 56px;
+  padding-bottom: 64px;
   text-align: center;
 }
 
@@ -310,4 +312,112 @@ footer.site a:hover {
 
 .footer-sep {
   margin: 0 8px;
+}
+
+.footer-note {
+  display: block;
+  margin-top: 8px;
+  font-size: 12px;
+}
+
+/* App sub-page components (StrideLog, SweatSlot, Runway) */
+html {
+  scroll-behavior: smooth;
+}
+
+.site-nav a:hover {
+  color: var(--accent);
+}
+
+.hero-tag {
+  display: inline-block;
+  font-size: 13px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--accent);
+  margin-bottom: 16px;
+}
+
+.hero .status {
+  margin-top: 8px;
+}
+
+.section-title {
+  font-size: 22px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  text-align: center;
+  margin: 0 0 32px;
+}
+
+.features-bg {
+  background: var(--bg-subtle);
+  padding-top: 56px;
+}
+
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 16px;
+  padding: 8px 0 56px;
+}
+
+.feature-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 24px;
+}
+
+.feature-card .icon {
+  font-size: 24px;
+  margin-bottom: 12px;
+  display: block;
+}
+
+.feature-card h3 {
+  font-size: 16px;
+  font-weight: 600;
+  margin: 0 0 6px;
+  letter-spacing: -0.01em;
+}
+
+.feature-card p {
+  font-size: 14px;
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+.screenshots {
+  padding-top: 56px;
+  padding-bottom: 72px;
+}
+
+.screenshots-scroll {
+  display: flex;
+  gap: 16px;
+  overflow-x: auto;
+  padding-bottom: 12px;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+}
+
+.screenshots-scroll img {
+  height: 440px;
+  width: auto;
+  border-radius: 16px;
+  scroll-snap-align: start;
+  flex-shrink: 0;
+}
+
+.screenshots-placeholder {
+  width: 100%;
+  padding: 48px 24px;
+  text-align: center;
+  color: var(--text-secondary);
+  background: var(--bg-subtle);
+  border-radius: 16px;
+  border: 2px dashed var(--border);
+  font-size: 14px;
 }
