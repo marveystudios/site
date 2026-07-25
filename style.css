@@ -132,6 +132,7 @@ nav.site-nav {
 }
 
 .app-card {
+  position: relative;
   display: block;
   background: var(--card-bg);
   border: 1px solid var(--border);
@@ -146,9 +147,40 @@ nav.site-nav {
 }
 
 .app-card .icon {
+  position: absolute;
+  top: 24px;
+  right: 24px;
   font-size: 28px;
-  margin-bottom: 12px;
   display: block;
+}
+
+.app-card .icon img {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  display: block;
+}
+
+.app-card .icon .icon-dark {
+  display: none;
+}
+
+[data-theme="dark"] .app-card .icon .icon-light {
+  display: none;
+}
+
+[data-theme="dark"] .app-card .icon .icon-dark {
+  display: block;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .app-card .icon .icon-light {
+    display: none;
+  }
+
+  :root:not([data-theme="light"]) .app-card .icon .icon-dark {
+    display: block;
+  }
 }
 
 .app-card h2 {
@@ -162,6 +194,7 @@ nav.site-nav {
   font-size: 14px;
   color: var(--text-secondary);
   margin: 0 0 14px;
+  padding-right: 56px;
 }
 
 .status {
