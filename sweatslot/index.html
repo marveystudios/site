@@ -4,7 +4,82 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>SweatSlot — Marvey Studios</title>
+  <meta name="description" content="SweatSlot lets you plan workouts without cluttering your calendar app — define workout types and simple rules, then drag them straight onto a week, two-week, or month view.">
   <link rel="stylesheet" href="../style.css">
+  <style>
+    /* SweatSlot-specific additions layered on top of the shared stylesheet */
+    html { scroll-behavior: smooth; }
+
+    .site-nav a:hover { color: var(--accent); }
+
+    .hero-tag {
+      display: inline-block;
+      font-size: 13px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--accent);
+      margin-bottom: 16px;
+    }
+
+    .hero .status { margin-top: 8px; }
+
+    .section-title {
+      font-size: 22px;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      text-align: center;
+      margin: 0 0 32px;
+    }
+
+    .features-bg { background: var(--bg-subtle); }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 16px;
+      padding: 8px 0 56px;
+    }
+
+    .feature-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 24px;
+    }
+
+    .feature-card .icon {
+      font-size: 24px;
+      margin-bottom: 12px;
+      display: block;
+    }
+
+    .feature-card h3 {
+      font-size: 16px;
+      font-weight: 600;
+      margin: 0 0 6px;
+      letter-spacing: -0.01em;
+    }
+
+    .feature-card p {
+      font-size: 14px;
+      color: var(--text-secondary);
+      margin: 0;
+    }
+
+    .screenshots { padding: 8px 0 72px; }
+
+    .screenshots-placeholder {
+      width: 100%;
+      padding: 48px 24px;
+      text-align: center;
+      color: var(--text-secondary);
+      background: var(--bg-subtle);
+      border-radius: 16px;
+      border: 2px dashed var(--border);
+      font-size: 14px;
+    }
+  </style>
 </head>
 <body>
 
@@ -12,17 +87,80 @@
     <div class="wrap">
       <a class="logo" href="../">Marvey Studios</a>
       <nav class="site-nav">
+        <a href="#features">Features</a>
+        <a href="#contact">Contact</a>
         <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">🌙</button>
       </nav>
     </div>
   </header>
 
   <main>
-    <section class="placeholder wrap">
-      <span class="icon">🏋️</span>
-      <h1>SweatSlot</h1>
-      <p><!-- Placeholder — replace with the real one-line pitch --> A one-line description of SweatSlot goes here.</p>
-      <a class="back-link" href="../">← Back to Marvey Studios</a>
+    <section class="hero">
+      <div class="wrap">
+        <span class="hero-tag">🏋️ Smart Workout Planning</span>
+        <h1>Plan Workouts Without Cluttering Your Calendar</h1>
+        <p>SweatSlot lets you define your workout types and simple rules, then drag them straight onto your calendar. No more mental math about whether you've hit your training targets this week.</p>
+        <span class="status">In development</span>
+      </div>
+    </section>
+
+    <section class="features-bg" id="features">
+      <div class="wrap">
+        <h2 class="section-title">Everything You Need</h2>
+        <div class="features-grid">
+
+          <div class="feature-card">
+            <span class="icon">🏋️</span>
+            <h3>Custom Workout Types</h3>
+            <p>Define your own workout types — running, cycling, strength, swimming, or anything else you train — each with a set duration.</p>
+          </div>
+
+          <div class="feature-card">
+            <span class="icon">🎚️</span>
+            <h3>Min/Max Rules</h3>
+            <p>Set simple limits like "max one long run per week" or "at least 2 strength sessions per week," and let SweatSlot keep you on track.</p>
+          </div>
+
+          <div class="feature-card">
+            <span class="icon">🔁</span>
+            <h3>Flexible Frequency</h3>
+            <p>Rules aren't limited to weekly. Set something like "at least one swim every 2 weeks" for lower-frequency training too.</p>
+          </div>
+
+          <div class="feature-card">
+            <span class="icon">📅</span>
+            <h3>Calendar-Aware</h3>
+            <p>Reads your existing calendar and shows a week, two-week, or month view, so you always plan around what's already there.</p>
+          </div>
+
+          <div class="feature-card">
+            <span class="icon">🖐️</span>
+            <h3>Drag to Plan</h3>
+            <p>Drag your workout types straight onto the calendar to fill out your training schedule in seconds, not tedious manual entries.</p>
+          </div>
+
+          <div class="feature-card">
+            <span class="icon">📱</span>
+            <h3>Native iOS Experience</h3>
+            <p>Supports light and dark mode, iCloud sync across all your devices, and feels right at home on your iPhone.</p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <section class="screenshots wrap">
+      <h2 class="section-title">See It in Action</h2>
+      <!-- Replace this placeholder with actual screenshot <img> tags when ready -->
+      <div class="screenshots-placeholder">
+        📸 Screenshots coming soon
+      </div>
+    </section>
+
+    <section class="wrap contact" id="contact">
+      <h2>Get in touch</h2>
+      <p>Have questions, feedback, or want to be notified when SweatSlot launches? I'd love to hear from you.</p>
+      <a class="contact-link" href="mailto:hi@bricklog.app">📧 hi@bricklog.app</a>
     </section>
   </main>
 
