@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Privacy Policy — Marvey Studios</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header class="site">
+    <div class="wrap">
+      <a class="logo" href="./">Marvey Studios</a>
+      <nav class="site-nav">
+        <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">🌙</button>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="wrap" style="padding: 48px 0 72px;">
+      <h1 style="font-size:28px; margin-bottom:4px;">Privacy Policy</h1>
+      <p style="color:var(--text-secondary); font-size:14px; margin-top:0;">
+        Last updated: <!-- set the date you actually publish this -->[date]. Applies to all Marvey Studios apps:
+        BrickLog, StrideLog, SweatSlot, and Runway.
+      </p>
+
+      <!--
+        DRAFT — NOT LEGAL ADVICE.
+        This is a starting point covering what's known about each app's data
+        practices today. Review before publishing, especially once SweatSlot
+        and Runway's actual data handling is finalized. Because you're
+        distributing from Belgium, this should also hold up under GDPR, not
+        just Apple's App Store requirements — worth a proper legal review,
+        particularly once StrideLog (third-party OAuth data) ships.
+      -->
+
+      <h2>Overview</h2>
+      <p>Marvey Studios apps don't run their own servers to store your collection data.
+      Your data — LEGO sets, running shoes, workouts, and so on — syncs through
+      your own personal iCloud account via Apple's CloudKit. Marvey Studios does
+      not have access to it, and it is never sold or shared with advertisers.</p>
+
+      <h2>Data used by each app</h2>
+
+      <h3>BrickLog</h3>
+      <p>When you look up a LEGO set, its set number is sent to the
+      <a href="https://rebrickable.com">Rebrickable</a> API to fetch set and piece
+      details. If you add your own Rebrickable API key, it's stored locally on
+      your device, not on any Marvey Studios server.</p>
+
+      <h3>StrideLog</h3>
+      <p>If you choose to connect Strava, StrideLog uses Strava's OAuth to read
+      your running activity and shoe data. This connection is optional — the
+      app remains fully usable without it — and can be revoked at any time from
+      Settings, both in the app and in your Strava account.</p>
+
+      <h3>SweatSlot &amp; Runway</h3>
+      <p><!-- Placeholder — fill in once these apps' actual data handling is finalized -->
+      [Describe what data each app uses and any third-party services it connects to.]</p>
+
+      <h2>Analytics and tracking</h2>
+      <p><!-- Confirm this is accurate before publishing -->
+      Marvey Studios apps do not use third-party analytics or advertising SDKs.</p>
+
+      <h2>Your rights</h2>
+      <p>Since your collection data lives in your own iCloud account, you can
+      access, export, or delete it at any time directly within the app or by
+      managing your iCloud storage. For data handled by third-party services
+      (Rebrickable, Strava), refer to their own privacy policies for how they
+      handle your account data.</p>
+
+      <h2>Children's privacy</h2>
+      <p>Marvey Studios apps are not directed at children under 13 (or the
+      relevant age in your region), and do not knowingly collect personal data
+      from children.</p>
+
+      <h2>Changes to this policy</h2>
+      <p>This policy may be updated as apps change or new ones are added. Check
+      back here for the current version.</p>
+
+      <h2>Contact</h2>
+      <p>Questions about this policy? Reach out at
+      <a href="mailto:hi@bricklog.app">hi@bricklog.app</a>.</p>
+    </section>
+  </main>
+
+  <footer class="site">
+    <div class="wrap">
+      <a href="./">← Back to Marvey Studios</a>
+    </div>
+  </footer>
+
+  <script>
+    const toggle = document.getElementById('themeToggle');
+    const root = document.documentElement;
+    const stored = localStorage.getItem('theme');
+    if (stored) root.setAttribute('data-theme', stored);
+    updateIcon();
+
+    toggle.addEventListener('click', () => {
+      const current = root.getAttribute('data-theme') ||
+        (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+      const next = current === 'dark' ? 'light' : 'dark';
+      root.setAttribute('data-theme', next);
+      localStorage.setItem('theme', next);
+      updateIcon();
+    });
+
+    function updateIcon() {
+      const current = root.getAttribute('data-theme') ||
+        (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+      toggle.textContent = current === 'dark' ? '☀️' : '🌙';
+    }
+  </script>
+
+</body>
+</html>

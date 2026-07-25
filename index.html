@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Marvey Studios</title>
+  <meta name="description" content="Marvey Studios builds a family of focused collection-tracker apps for iOS — BrickLog, StrideLog, SweatSlot, and Runway.">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header class="site">
+    <div class="wrap">
+      <div class="logo">Marvey Studios</div>
+      <nav class="site-nav">
+        <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">🌙</button>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="wrap">
+        <h1>Focused apps for people who like to keep track</h1>
+        <p>A family of collection-tracker apps, each built around one thing done well.</p>
+      </div>
+    </section>
+
+    <section class="wrap">
+      <div class="app-grid">
+
+        <a class="app-card" href="https://bricklog.app">
+          <span class="icon">🧱</span>
+          <h2>BrickLog</h2>
+          <p>Track your LEGO collection, minifigures, and wishlist.</p>
+          <span class="status shipped">Shipped</span>
+        </a>
+
+        <a class="app-card" href="stridelog/">
+          <span class="icon">👟</span>
+          <h2>StrideLog</h2>
+          <p>Track your running shoes and know when it's time to retire a pair.</p>
+          <span class="status beta">TestFlight beta</span>
+        </a>
+
+        <a class="app-card" href="sweatslot/">
+          <span class="icon">🏋️</span>
+          <h2>SweatSlot</h2>
+          <p>Coming soon.</p>
+          <span class="status">In development</span>
+        </a>
+
+        <a class="app-card" href="runway/">
+          <span class="icon">✈️</span>
+          <h2>Runway</h2>
+          <p>Coming soon.</p>
+          <span class="status">In development</span>
+        </a>
+
+      </div>
+    </section>
+
+    <section class="wrap about">
+      <h2>About</h2>
+      <!-- Placeholder — edit freely, this is just a reasonable starting point -->
+      <p>I'm Anneleen, an indie iOS developer building Marvey Studios by myself.
+      Every app here starts from the same idea: a focused, single-purpose tool
+      for the things people like to keep track of, without the clutter.</p>
+    </section>
+
+    <section class="wrap contact" id="contact">
+      <h2>Get in touch</h2>
+      <p>Questions, feedback, or need support with one of the apps? I'd love to hear from you.</p>
+      <a class="contact-link" href="mailto:hi@bricklog.app">📧 hi@bricklog.app</a>
+      <!-- Add a social link here too if you'd like one, e.g.:
+      <a class="contact-link" href="https://instagram.com/yourhandle">📷 @yourhandle</a> -->
+    </section>
+  </main>
+
+  <footer class="site">
+    <div class="wrap">
+      <a href="privacy.html">Privacy Policy</a>
+      <span class="footer-sep">·</span>
+      &copy; 2026 Marvey Studios
+    </div>
+  </footer>
+
+  <script>
+    const toggle = document.getElementById('themeToggle');
+    const root = document.documentElement;
+    const stored = localStorage.getItem('theme');
+    if (stored) root.setAttribute('data-theme', stored);
+    updateIcon();
+
+    toggle.addEventListener('click', () => {
+      const current = root.getAttribute('data-theme') ||
+        (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+      const next = current === 'dark' ? 'light' : 'dark';
+      root.setAttribute('data-theme', next);
+      localStorage.setItem('theme', next);
+      updateIcon();
+    });
+
+    function updateIcon() {
+      const current = root.getAttribute('data-theme') ||
+        (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+      toggle.textContent = current === 'dark' ? '☀️' : '🌙';
+    }
+  </script>
+
+</body>
+</html>

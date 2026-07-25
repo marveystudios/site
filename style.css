@@ -1,0 +1,280 @@
+/* ==========================================================================
+   Marvey Studios — shared site styles
+   Approximates BrickLog's current look: clean, native-feeling, light/dark.
+   Swap the variables below once you can compare against the real bricklog.app
+   CSS side by side — everything else derives from these.
+   ========================================================================== */
+
+:root {
+  --accent: #007aff;
+  --accent-dark: #0a84ff;
+
+  --bg: #ffffff;
+  --bg-subtle: #f5f5f7;
+  --card-bg: #ffffff;
+  --text: #1d1d1f;
+  --text-secondary: #6e6e73;
+  --border: #e5e5e7;
+}
+
+[data-theme="dark"] {
+  --bg: #000000;
+  --bg-subtle: #1c1c1e;
+  --card-bg: #1c1c1e;
+  --text: #f5f5f7;
+  --text-secondary: #98989d;
+  --border: #2c2c2e;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #000000;
+    --bg-subtle: #1c1c1e;
+    --card-bg: #1c1c1e;
+    --text: #f5f5f7;
+    --text-secondary: #98989d;
+    --border: #2c2c2e;
+  }
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, sans-serif;
+  line-height: 1.5;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.wrap {
+  max-width: 880px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* Header */
+header.site {
+  border-bottom: 1px solid var(--border);
+}
+
+header.site .wrap {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 64px;
+}
+
+.logo {
+  font-size: 17px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+nav.site-nav {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  font-size: 14px;
+  color: var(--text-secondary);
+}
+
+.theme-toggle {
+  background: none;
+  border: none;
+  font-size: 17px;
+  cursor: pointer;
+  color: var(--text);
+  padding: 4px;
+  line-height: 1;
+}
+
+/* Hero */
+.hero {
+  padding: 64px 0 40px;
+  text-align: center;
+}
+
+.hero h1 {
+  font-size: 34px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin: 0 0 12px;
+}
+
+.hero p {
+  font-size: 17px;
+  color: var(--text-secondary);
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+/* App grid */
+.app-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  padding: 8px 0 72px;
+}
+
+@media (max-width: 620px) {
+  .app-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.app-card {
+  display: block;
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 24px;
+  transition: border-color 0.15s ease, transform 0.15s ease;
+}
+
+.app-card:hover {
+  border-color: var(--accent);
+  transform: translateY(-2px);
+}
+
+.app-card .icon {
+  font-size: 28px;
+  margin-bottom: 12px;
+  display: block;
+}
+
+.app-card h2 {
+  font-size: 19px;
+  font-weight: 600;
+  margin: 0 0 6px;
+  letter-spacing: -0.01em;
+}
+
+.app-card p {
+  font-size: 14px;
+  color: var(--text-secondary);
+  margin: 0 0 14px;
+}
+
+.status {
+  display: inline-block;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 3px 10px;
+  border-radius: 100px;
+  background: var(--bg-subtle);
+  color: var(--text-secondary);
+}
+
+.status.shipped {
+  color: #1a9e57;
+  background: rgba(26, 158, 87, 0.12);
+}
+
+.status.beta {
+  color: var(--accent);
+  background: rgba(0, 122, 255, 0.12);
+}
+
+/* Placeholder app pages */
+.placeholder {
+  padding: 80px 0;
+  text-align: center;
+}
+
+.placeholder .icon {
+  font-size: 40px;
+  display: block;
+  margin-bottom: 16px;
+}
+
+.placeholder h1 {
+  font-size: 28px;
+  margin: 0 0 12px;
+}
+
+.placeholder p {
+  color: var(--text-secondary);
+  font-size: 16px;
+  max-width: 420px;
+  margin: 0 auto 28px;
+}
+
+.back-link {
+  font-size: 14px;
+  color: var(--accent);
+  font-weight: 600;
+}
+
+/* About */
+.about {
+  padding: 8px 0 56px;
+  border-top: 1px solid var(--border);
+}
+
+.about h2 {
+  font-size: 22px;
+  font-weight: 600;
+  margin: 40px 0 16px;
+}
+
+.about p {
+  font-size: 16px;
+  color: var(--text-secondary);
+  max-width: 560px;
+}
+
+/* Contact */
+.contact {
+  padding: 0 0 64px;
+  text-align: center;
+}
+
+.contact h2 {
+  font-size: 22px;
+  font-weight: 600;
+  margin: 0 0 12px;
+}
+
+.contact p {
+  font-size: 15px;
+  color: var(--text-secondary);
+  margin: 0 0 20px;
+}
+
+.contact-link {
+  display: inline-block;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--accent);
+  margin: 0 12px;
+}
+
+/* Footer */
+footer.site {
+  border-top: 1px solid var(--border);
+  padding: 32px 0;
+  font-size: 13px;
+  color: var(--text-secondary);
+  text-align: center;
+}
+
+footer.site a {
+  color: var(--text-secondary);
+}
+
+footer.site a:hover {
+  color: var(--accent);
+}
+
+.footer-sep {
+  margin: 0 8px;
+}

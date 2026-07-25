@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="StrideLog helps you track your running shoes, monitor mileage, and sync with Strava. The simple way to manage your running gear." />
+  <title>StrideLog - Track Your Running Shoes</title>
+  <style>
+    /* ── Variables ── */
+    :root {
+      --accent:      #FC4C02;
+      --accent-dark: #d93e00;
+      --bg:          #ffffff;
+      --bg-alt:      #f5f5f7;
+      --text:        #1d1d1f;
+      --text-muted:  #6e6e73;
+      --border:      #d2d2d7;
+      --card-bg:     #ffffff;
+      --nav-bg:      rgba(255,255,255,0.85);
+      --shadow:      0 2px 20px rgba(0,0,0,0.08);
+    }
+
+    [data-theme="dark"] {
+      --bg:         #000000;
+      --bg-alt:     #1c1c1e;
+      --text:       #f5f5f7;
+      --text-muted: #98989f;
+      --border:     #38383a;
+      --card-bg:    #1c1c1e;
+      --nav-bg:     rgba(0,0,0,0.85);
+      --shadow:     0 2px 20px rgba(0,0,0,0.4);
+    }
+
+    /* ── Reset ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      transition: background 0.3s, color 0.3s;
+    }
+
+    /* ── Navigation ── */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--nav-bg);
+      backdrop-filter: saturate(180%) blur(20px);
+      -webkit-backdrop-filter: saturate(180%) blur(20px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-inner {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 0 24px;
+      height: 52px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .nav-logo {
+      font-weight: 700;
+      font-size: 1.05rem;
+      color: var(--text);
+      text-decoration: none;
+      letter-spacing: -0.02em;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.9rem;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--accent); }
+
+    .theme-toggle {
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-size: 1.1rem;
+      padding: 4px;
+      color: var(--text-muted);
+      line-height: 1;
+    }
+
+    /* ── Hero ── */
+    .hero {
+      text-align: center;
+      padding: 80px 24px 60px;
+      max-width: 680px;
+      margin: 0 auto;
+    }
+
+    .hero-tag {
+      display: inline-block;
+      font-size: 0.8rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--accent);
+      margin-bottom: 20px;
+    }
+
+    .hero-emoji {
+      font-size: 3rem;
+      display: block;
+      margin-bottom: 12px;
+    }
+
+    .hero h1 {
+      font-size: clamp(2rem, 5vw, 3rem);
+      font-weight: 700;
+      letter-spacing: -0.04em;
+      line-height: 1.1;
+      margin-bottom: 20px;
+    }
+
+    .hero p {
+      font-size: 1.15rem;
+      color: var(--text-muted);
+      max-width: 520px;
+      margin: 0 auto 36px;
+    }
+
+    .coming-soon {
+      display: inline-block;
+      background: var(--bg-alt);
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      font-weight: 500;
+      padding: 12px 28px;
+      border-radius: 980px;
+    }
+
+    /* ── Section shared ── */
+    section {
+      padding: 72px 24px;
+    }
+
+    .section-inner {
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .section-title {
+      font-size: clamp(1.5rem, 3vw, 2rem);
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      text-align: center;
+      margin-bottom: 48px;
+    }
+
+    /* ── Features ── */
+    .features-bg { background: var(--bg-alt); }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 20px;
+    }
+
+    .feature-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 28px 24px;
+      box-shadow: var(--shadow);
+    }
+
+    .feature-icon {
+      font-size: 1.9rem;
+      margin-bottom: 12px;
+      display: block;
+    }
+
+    .feature-card h3 {
+      font-size: 1.05rem;
+      font-weight: 600;
+      margin-bottom: 8px;
+      letter-spacing: -0.01em;
+    }
+
+    .feature-card p {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      line-height: 1.55;
+    }
+
+    /* ── Screenshots ── */
+    .screenshots-scroll {
+      display: flex;
+      gap: 16px;
+      overflow-x: auto;
+      padding-bottom: 12px;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .screenshots-scroll::-webkit-scrollbar { height: 4px; }
+    .screenshots-scroll::-webkit-scrollbar-track { background: var(--bg-alt); border-radius: 2px; }
+    .screenshots-scroll::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+
+    .screenshots-scroll img {
+      height: 480px;
+      width: auto;
+      border-radius: 20px;
+      scroll-snap-align: start;
+      flex-shrink: 0;
+      box-shadow: var(--shadow);
+    }
+
+    .screenshots-placeholder {
+      width: 100%;
+      padding: 48px 24px;
+      text-align: center;
+      color: var(--text-muted);
+      background: var(--bg-alt);
+      border-radius: 16px;
+      border: 2px dashed var(--border);
+      font-size: 0.9rem;
+    }
+
+    /* ── Contact ── */
+    .contact-links {
+      display: flex;
+      justify-content: center;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+
+    .contact-links a {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--bg-alt);
+      border: 1px solid var(--border);
+      color: var(--text);
+      text-decoration: none;
+      padding: 12px 22px;
+      border-radius: 980px;
+      font-size: 0.9rem;
+      font-weight: 500;
+      transition: border-color 0.2s, color 0.2s;
+    }
+
+    .contact-links a:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    /* ── Footer ── */
+    footer {
+      background: var(--bg-alt);
+      border-top: 1px solid var(--border);
+      padding: 32px 24px;
+    }
+
+    .footer-inner {
+      max-width: 1000px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+      text-align: center;
+    }
+
+    .footer-logo {
+      font-weight: 700;
+      font-size: 1rem;
+      color: var(--text);
+      letter-spacing: -0.02em;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .footer-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.85rem;
+      transition: color 0.2s;
+    }
+
+    .footer-links a:hover { color: var(--accent); }
+
+    .footer-copy {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 600px) {
+      .nav-links { gap: 16px; }
+      .hero { padding: 60px 20px 48px; }
+      section { padding: 56px 20px; }
+      .screenshots-scroll img { height: 380px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav>
+    <div class="nav-inner">
+      <a href="#" class="nav-logo">👟 StrideLog</a>
+      <ul class="nav-links">
+        <li><a href="#features">Features</a></li>
+        <li><a href="#contact">Contact</a></li>
+        <li><a href="https://bricklog.app/privacy.html">Privacy</a></li>
+        <li>
+          <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">🌙</button>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section>
+    <div class="hero">
+      <span class="hero-tag">👟 For Runners</span>
+      <h1>Track Your Running Shoes</h1>
+      <p>StrideLog helps you track your running shoes, monitor mileage through Strava, add more info and get fun statistics. The simple way to manage your running gear.</p>
+      <span class="coming-soon">Coming Soon to the App Store</span>
+    </div>
+  </section>
+
+  <!-- Features -->
+  <section class="features-bg" id="features">
+    <div class="section-inner">
+      <h2 class="section-title">Everything You Need</h2>
+      <div class="features-grid">
+
+        <div class="feature-card">
+          <span class="feature-icon">👟</span>
+          <h3>Shoe Tracking</h3>
+          <p>Log all your running shoes in one place. Track brand, model, and when you first laced them up.</p>
+        </div>
+
+        <div class="feature-card">
+          <span class="feature-icon">📏</span>
+          <h3>Mileage Tracking</h3>
+          <p>Know exactly how many kilometers — or miles — are on each pair. Never run a shoe into the ground by accident again.</p>
+        </div>
+
+        <div class="feature-card">
+          <span class="feature-icon">🔗</span>
+          <h3>Powered by Strava</h3>
+          <p>Link your Strava account to automatically import your shoes and keep your mileage up to date after every run.</p>
+        </div>
+
+        <div class="feature-card">
+          <span class="feature-icon">🗂️</span>
+          <h3>Reserve Shoes</h3>
+          <p>Track shoes you own but haven't added to Strava yet. Keep your full collection in one place.</p>
+        </div>
+
+        <div class="feature-card">
+          <span class="feature-icon">🏁</span>
+          <h3>Retirement Tracking</h3>
+          <p>Retire worn-out shoes and keep a record of their lifetime mileage. A fitting send-off for faithful companions.</p>
+        </div>
+
+        <div class="feature-card">
+          <span class="feature-icon">📱</span>
+          <h3>Native iOS Experience</h3>
+          <p>Supports light and dark mode, iCloud sync across all your devices, and feels right at home on your iPhone.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Screenshots -->
+  <section>
+    <div class="section-inner">
+      <h2 class="section-title">See It in Action</h2>
+      <!-- Replace this placeholder with actual screenshot <img> tags when ready -->
+      <div class="screenshots-placeholder">
+        📸 Screenshots coming soon
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section class="features-bg" id="contact">
+    <div class="section-inner">
+      <h2 class="section-title">Get in Touch</h2>
+      <p style="text-align:center; color:var(--text-muted); margin-bottom:32px; font-size:0.95rem;">
+        Have questions, feedback, or want to be notified when StrideLog launches? We'd love to hear from you.
+      </p>
+      <div class="contact-links">
+        <a href="mailto:hi@bricklog.app">📧 hi@bricklog.app</a>
+        <a href="http://instagram.com/bricklogapp" target="_blank" rel="noopener">📷 @bricklogapp</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-logo">👟 StrideLog</div>
+      <nav class="footer-links">
+        <a href="https://bricklog.app/privacy.html">Privacy Policy</a>
+        <a href="https://bricklog.app/terms.html">Terms of Service</a>
+        <a href="#contact">Contact</a>
+      </nav>
+      <p class="footer-copy">
+        © 2025 Marvey Studios. All rights reserved.<br />
+        Strava® is a trademark of Strava, Inc., which does not sponsor, authorize, or endorse this app.
+      </p>
+    </div>
+  </footer>
+
+  <script>
+    // Dark mode toggle — mirrors system preference, persists in localStorage
+    const toggle = document.getElementById('themeToggle');
+    const root = document.documentElement;
+
+    const saved = localStorage.getItem('stridelog-theme');
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    const isDark = saved ? saved === 'dark' : prefersDark;
+
+    if (isDark) {
+      root.setAttribute('data-theme', 'dark');
+      toggle.textContent = '☀️';
+    }
+
+    toggle.addEventListener('click', () => {
+      const dark = root.getAttribute('data-theme') === 'dark';
+      root.setAttribute('data-theme', dark ? 'light' : 'dark');
+      toggle.textContent = dark ? '🌙' : '☀️';
+      localStorage.setItem('stridelog-theme', dark ? 'light' : 'dark');
+    });
+  </script>
+
+</body>
+</html>

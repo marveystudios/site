@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SweatSlot — Marvey Studios</title>
+  <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+
+  <header class="site">
+    <div class="wrap">
+      <a class="logo" href="../">Marvey Studios</a>
+      <nav class="site-nav">
+        <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">🌙</button>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="placeholder wrap">
+      <span class="icon">🏋️</span>
+      <h1>SweatSlot</h1>
+      <p><!-- Placeholder — replace with the real one-line pitch --> A one-line description of SweatSlot goes here.</p>
+      <a class="back-link" href="../">← Back to Marvey Studios</a>
+    </section>
+  </main>
+
+  <footer class="site">
+    <div class="wrap">
+      <a href="../privacy.html">Privacy Policy</a>
+      <span class="footer-sep">·</span>
+      &copy; 2026 Marvey Studios
+    </div>
+  </footer>
+
+  <script>
+    const toggle = document.getElementById('themeToggle');
+    const root = document.documentElement;
+    const stored = localStorage.getItem('theme');
+    if (stored) root.setAttribute('data-theme', stored);
+    updateIcon();
+
+    toggle.addEventListener('click', () => {
+      const current = root.getAttribute('data-theme') ||
+        (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+      const next = current === 'dark' ? 'light' : 'dark';
+      root.setAttribute('data-theme', next);
+      localStorage.setItem('theme', next);
+      updateIcon();
+    });
+
+    function updateIcon() {
+      const current = root.getAttribute('data-theme') ||
+        (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+      toggle.textContent = current === 'dark' ? '☀️' : '🌙';
+    }
+  </script>
+
+</body>
+</html>
