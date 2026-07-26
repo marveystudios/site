@@ -266,6 +266,43 @@ nav.site-nav {
   max-width: 560px;
 }
 
+.about-content {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+}
+
+.about-text {
+  flex: 1;
+  min-width: 0;
+}
+
+.about-photo {
+  flex-shrink: 0;
+  background: #fff;
+  padding: 12px 12px 32px;
+  border-radius: 2px;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.18);
+  transform: rotate(-4deg);
+}
+
+.about-photo img {
+  display: block;
+  width: 200px;
+  height: auto;
+  border-radius: 1px;
+}
+
+@media (max-width: 700px) {
+  .about-content {
+    flex-direction: column;
+  }
+
+  .about-photo {
+    align-self: center;
+  }
+}
+
 /* Contact */
 .contact {
   padding-top: 56px;
